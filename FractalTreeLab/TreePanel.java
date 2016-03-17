@@ -4,13 +4,12 @@ import javax.swing.JPanel;
 public class TreePanel extends JPanel
 {
    private final int PANEL_WIDTH = 400;
-   private final int PANEL_HEIGHT = 400;
+   private final int PANEL_HEIGHT = 500;
 
    private final double SQ = Math.sqrt(3.0) / 6;
 
-   private final int TOPX = 200, TOPY = 20;
-   private final int LEFTX = 60, LEFTY = 300;
-   private final int RIGHTX = 340, RIGHTY = 300;
+   private final int TOPX = 150, TOPY = 150;
+   private final int LEFTX = 20, LEFTY = 300;
    private final double THETA = 45.0;
    private int current; //current order
 
@@ -30,25 +29,31 @@ public class TreePanel extends JPanel
    //  intermediate points are computed, and each line segment is
    //  drawn as a fractal.
    //-----------------------------------------------------------------
-   public void drawFractal (double theta, double x, double y, double length, Graphics page, int order, double oldx, double oldy)
+   public void drawFractal (double theta, double x, double y, double length, Graphics page, int order)
    {
       double leftX, leftY, rightX, rightY, newThetaL, newThetaR, newLength;
       // need previous angle to do theta previous + current theta to 
-      if (order == 1)
+      if (order >= 15)
          return;
       else
       {
          newThetaL = theta + THETA;
          newThetaR = theta - THETA;
          newLength = length * 2/3;  // two thirds
-         leftX = (newLength * sine(newThetaL))+ x1;
-         leftY = (newLength * cos(newThetaL)) + y1;
-         rightX = (newLength * sine(newThetaR)) + x1;
-         rightY = (newLength * cos(newThetaR)) + y1;
-         order--;
-         page.drawLine
-         drawFractal (newTheta, leftX, leftY, newLength, page, order);
-         drawFractal (newTheta, rightX, rightY, newLength, page, order);
+         leftX = (newLength * Math.sin(newThetaL))+ x;
+         leftY = y -(newLength * Math.cos(newThetaL));
+         rightX = (newLength * Math.sin(newThetaR)) + x;
+         rightY = y -(newLength * Math.cos(newThetaR));
+         order++;
+         if (order >= 9)
+         {
+             page.setColor(Color.blue);
+            }
+             
+         page.drawLine((int) x, (int) y, (int) leftX, (int) leftY);
+         page.drawLine((int) x,(int) y,(int) rightX, (int) rightY);
+         drawFractal(newThetaL, leftX, leftY, newLength, page, order);
+         drawFractal(newThetaR, rightX, rightY, newLength, page, order);
       }
    }
 
@@ -59,11 +64,9 @@ public class TreePanel extends JPanel
    {
       super.paintComponent (page);
 
-      page.setColor (Color.green);
-
-      drawFractal (current, TOPX, TOPY, LEFTX, LEFTY, page);
-      drawFractal (current, LEFTX, LEFTY, RIGHTX, RIGHTY, page);
-      drawFractal (current, RIGHTX, RIGHTY, TOPX, TOPY, page);
+      page.setColor (Color.red);
+      page.drawLine(250,250, 250, 200);
+      drawFractal (0.0, 250, 200, 50, page, 1);
    }
 
    //-----------------------------------------------------------------

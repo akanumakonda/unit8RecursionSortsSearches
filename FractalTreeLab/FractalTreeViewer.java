@@ -8,7 +8,7 @@ public class FractalTreeViewer implements ActionListener
     private final int WIDTH = 400;
     private final int HEIGHT = 500;
 
-    private final int MIN = 1, MAX = 9;
+    private final int MIN = 1, MAX = 15;
 
     private JButton increase, decrease;
     private JLabel titleLabel, orderLabel;
@@ -31,7 +31,7 @@ public class FractalTreeViewer implements ActionListener
         tools.setBackground (Color.yellow);
         tools.setOpaque (true);
 
-        titleLabel = new JLabel ("The Koch Snowflake");
+        titleLabel = new JLabel ("The Fractal Tree");
         titleLabel.setForeground (Color.black);
 
         increase = new JButton (new ImageIcon ("increase.gif"));
@@ -47,10 +47,10 @@ public class FractalTreeViewer implements ActionListener
         orderLabel.setForeground (Color.black);
 
         tools.add (titleLabel);
-        tools.add (Box.createHorizontalStrut (20));
+        tools.add (Box.createHorizontalStrut (40));
         tools.add (decrease);
         tools.add (increase);
-        tools.add (Box.createHorizontalStrut (20));
+        tools.add (Box.createHorizontalStrut (40));
         tools.add (orderLabel);
 
         drawing = new TreePanel (1);
@@ -60,7 +60,7 @@ public class FractalTreeViewer implements ActionListener
         panel.add (drawing);
 
         frame = new JFrame();
-        frame.setTitle("Knoch Snowflake");
+        frame.setTitle("Fractal Tree");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(WIDTH, HEIGHT);
         frame.add(panel);
