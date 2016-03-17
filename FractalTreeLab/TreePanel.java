@@ -10,7 +10,8 @@ public class TreePanel extends JPanel
 
    private final int TOPX = 150, TOPY = 150;
    private final int LEFTX = 20, LEFTY = 300;
-   private final double THETA = 45.0;
+   private final double THETAL = 45.0;
+   private final double THETAR =  45.0;
    private int current; //current order
 
    //-----------------------------------------------------------------
@@ -37,20 +38,17 @@ public class TreePanel extends JPanel
          return;
       else
       {
-         newThetaL = theta + THETA;
-         newThetaR = theta - THETA;
+         newThetaL = theta + THETAL;
+         newThetaR = theta - THETAR;
          newLength = length * 2/3;  // two thirds
          leftX = (newLength * Math.sin(newThetaL))+ x;
          leftY = y -(newLength * Math.cos(newThetaL));
          rightX = (newLength * Math.sin(newThetaR)) + x;
          rightY = y -(newLength * Math.cos(newThetaR));
          order++;
-         if (order >= 9)
-         {
-             page.setColor(Color.blue);
-            }
-             
+         page.setColor(Color.red);
          page.drawLine((int) x, (int) y, (int) leftX, (int) leftY);
+         page.setColor(Color.gray);
          page.drawLine((int) x,(int) y,(int) rightX, (int) rightY);
          drawFractal(newThetaL, leftX, leftY, newLength, page, order);
          drawFractal(newThetaR, rightX, rightY, newLength, page, order);
