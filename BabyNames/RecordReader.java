@@ -7,14 +7,15 @@ public class RecordReader
 {
    private double total;
    private double limit;
-
+   private double numberOfNames;
    /**
       Constructs a RecordReader with a zero total.
    */
-   public RecordReader(double aLimit)
+   public RecordReader(double aLimit, int numberNames)
    {
       total = 0;
       limit = aLimit;
+      numberOfNames = numberNames;
    }
 
    /**
@@ -22,11 +23,17 @@ public class RecordReader
       than the limit.
       @param in the input stream
    */
-   public void process(Scanner in)
+   public void process(Scanner s)
    {
-      String name = in.next();
-      int count = in.nextInt();
-      double percent = in.nextDouble();
+      String name = s.next();
+      String count = s.next();
+                       while ( count.indexOf( "," , 0) != -1)
+                 {
+                     String first = count.substring( 0, count.indexOf(",", 0));
+                     String last = count.substring( count.indexOf(",", 0) + 1, count.length()-1);
+                     count = first + last;
+                 }
+      double percent = (double) Integer.parseInt(count)/ numberOfNames;
       
       if (total < limit) { System.out.print(name + " "); }
       total = total + percent;
