@@ -14,16 +14,27 @@ public class ArrayUtil
       @return an array filled with length numbers between
       0 and n - 1
    */
-   public static int[] randomIntArray(int length, int n)
+   public static String[] randomStringArray(int length)
    {  
-      int[] a = new int[length];      
+      String[] a = new String[length];      
       for (int i = 0; i < a.length; i++)
       {
-         a[i] = generator.nextInt(n);
-      }
-      
+         a[i] = randomString(10);
+         }
       return a;
    }
+   
+   private static String randomString(int numChars)
+   {
+       String random = "";
+       for (int i = 0; i <= numChars; i++)
+       {
+           int randNum = (int) (Math.random()*26);
+           char c = (char) ('a' + randNum);
+           random += c;
+        }
+       return random;
+    }
 
    /**
       Swaps two entries of an array.
